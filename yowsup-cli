@@ -252,7 +252,7 @@ class DemosArgParser(YowArgParser):
         echoOpts.add_argument('-e', '--echo', action = "store_true", help = "Start the Yowsup Echo client")
 
         meaningOpts = self.add_argument_group("Meaning client demo")
-        meaningOpts.add_argument('-e', '--meaning', action = "store_true", help = "Start the Yowsup Meaning client")
+        meaningOpts.add_argument('-s', '--meaning', action = "store_true", help = "Start the Yowsup Meaning client")
 
         sendOpts = self.add_argument_group("Send client demo")
         sendOpts.add_argument('-s', '--send', action="store", help = "Send a message to specified phone number, "
