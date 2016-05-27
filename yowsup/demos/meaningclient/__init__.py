@@ -1,1 +1,1 @@
-from .stack import YowsupEchoStack
+from .stack import YowsupMeaningStack
