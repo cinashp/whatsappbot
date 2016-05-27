@@ -1,5 +1,5 @@
 from yowsup.stacks import  YowStackBuilder
-from .layer import EchoLayer
+from .layer import MeaningLayer
 from yowsup.layers.auth import AuthError
 from yowsup.layers import YowLayerEvent
 from yowsup.layers.network import YowNetworkLayer
@@ -10,7 +10,7 @@ class YowsupMeaningStack(object):
 
         self.stack = stackBuilder\
             .pushDefaultLayers(encryptionEnabled)\
-            .push(EchoLayer)\
+            .push(MeaningLayer)\
             .build()
 
         self.stack.setCredentials(credentials)
