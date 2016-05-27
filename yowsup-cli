@@ -315,7 +315,7 @@ class DemosArgParser(YowArgParser):
             print("\nYowsdown")
             sys.exit(0)
 
-        def startMeaning(self):
+    def startMeaning(self):
         from yowsup.demos import meaningclient
         credentials = self._getCredentials()
         if not credentials:
