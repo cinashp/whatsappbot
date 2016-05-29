@@ -10,6 +10,10 @@ def getmeaningfromapi( messageBody ):
     return formatresponse(response.text, word)
 
 def formatresponse(jsonstr, word):
+    if word.lower() == "ramraj":
+        formattedstr = "*ramraj*\n"
+        formattedstr = formattedstr + "1. Give name for Ashwin Rao G by his grandmother. Later it was chagned to Ashwin as he thought it was not cool."
+        return formattedstr;
     try:
         parsed_json = json.loads(jsonstr)
         formattedstr = "*" + word + "*\n"

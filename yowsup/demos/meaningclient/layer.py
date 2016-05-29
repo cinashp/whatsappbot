@@ -2,6 +2,7 @@ from yowsup.layers.interface                           import YowInterfaceLayer,
 from yowsup.layers.protocol_messages.protocolentities  import TextMessageProtocolEntity
 from yowsup.common.tools import Jid
 from meaning import getmeaningfromapi
+from tweet import gettweetsfromapi
 
 class MeaningLayer(YowInterfaceLayer):
 
@@ -18,12 +19,21 @@ class MeaningLayer(YowInterfaceLayer):
         self.toLower(messageProtocolEntity.ack(True))
 
         phone = messageProtocolEntity.getFrom()
+        messageBody = messageProtocolEntity.getBody()
+        messageToBeSent = ""
+        if messageProtocolEntity.getType() == 'text':
+            if 'meaning' in messageBody:
+                messageToBeSent = getmeaningfromapi(messageBody)
 
-        if messageProtocolEntity.getType() == 'text' and 'meaning' in messageProtocolEntity.getBody():
-            meaning = getmeaningfromapi(messageProtocolEntity.getBody())
-            print (meaning)
-            messageEntity = TextMessageProtocolEntity(meaning, to = Jid.normalize(phone))
-            self.toLower(messageEntity)
+            elif '#ipl' in messageBody.lower():
+                messageToBeSent = gettweetsfromapi(messageBody)
+
+            elif '#score' in messageBody.lower():
+                messageToBeSent = "Yet to be implemented"
+
+            print (messageToBeSent)
+            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+            self.toLower(messageEntity) 
 
     @ProtocolEntityCallback("receipt")
     def onReceipt(self, entity):
