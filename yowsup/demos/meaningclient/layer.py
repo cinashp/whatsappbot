@@ -24,16 +24,21 @@ class MeaningLayer(YowInterfaceLayer):
         if messageProtocolEntity.getType() == 'text':
             if 'meaning' in messageBody:
                 messageToBeSent = getmeaningfromapi(messageBody)
+                messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                self.toLower(messageEntity)
 
             elif '#ipl' in messageBody.lower():
                 messageToBeSent = gettweetsfromapi(messageBody)
+                messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                self.toLower(messageEntity)
 
             elif '#score' in messageBody.lower():
                 messageToBeSent = "Yet to be implemented"
+                messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                self.toLower(messageEntity)
 
             print (messageToBeSent)
-            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-            self.toLower(messageEntity) 
+             
 
     @ProtocolEntityCallback("receipt")
     def onReceipt(self, entity):
