@@ -28,7 +28,7 @@ class MeaningLayer(YowInterfaceLayer):
                 messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                 self.toLower(messageEntity)
 
-            elif '#ipl' in messageBody.lower():
+            elif 'ipl' in messageBody.lower():
                 messageToBeSent = gettweetsfromapi(messageBody)
                 messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                 self.toLower(messageEntity)
