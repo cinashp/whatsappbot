@@ -3,6 +3,7 @@ from yowsup.layers.protocol_messages.protocolentities  import TextMessageProtoco
 from yowsup.common.tools import Jid
 from meaning import getmeaningfromapi
 from tweet import gettweetsfromapi
+from tweet import getscorefromapi
 
 class MeaningLayer(YowInterfaceLayer):
 
@@ -32,8 +33,8 @@ class MeaningLayer(YowInterfaceLayer):
                 messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                 self.toLower(messageEntity)
 
-            elif '#score' in messageBody.lower():
-                messageToBeSent = "Yet to be implemented"
+            elif 'score' in messageBody.lower():
+                messageToBeSent = getscorefromapi(messageBody)
                 messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                 self.toLower(messageEntity)
 
