@@ -1,7 +1,7 @@
 from yowsup.layers.interface                           import YowInterfaceLayer, ProtocolEntityCallback
 from yowsup.layers.protocol_messages.protocolentities  import TextMessageProtocolEntity
 from yowsup.common.tools import Jid
-import requests
+from meaning import getmeaningfromapi
 
 class MeaningLayer(YowInterfaceLayer):
 
@@ -17,19 +17,13 @@ class MeaningLayer(YowInterfaceLayer):
         self.toLower(messageProtocolEntity.ack())
         self.toLower(messageProtocolEntity.ack(True))
 
-        if messageProtocolEntity.getType() == 'text' and 'meaning' in messageProtocolEntity.getBody():
-            phone = messageProtocolEntity.getFrom()
-            word = messageProtocolEntity.getBody().lower().replace("meaning", "").strip()
-            url = 'https://wordsapiv1.p.mashape.com/words/' + word
-            headers = {"X-Mashape-Key": "mUFkRnNzzkmshprtCzJabFXeypDgp1tI7vZjsnPFdzXVL7buZx",
-                       "Accept": "application/json"}
-            response = requests.get(url, headers=headers)
-            print (response.text)
-            meaning = response.text
-            messageToBeSent = meaning
-            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-            self.toLower(messageEntity)
+        phone = messageProtocolEntity.getFrom()
 
+        if messageProtocolEntity.getType() == 'text' and 'meaning' in messageProtocolEntity.getBody():
+            meaning = getmeaningfromapi(messageProtocolEntity.getBody())
+            print (meaning)
+            messageEntity = TextMessageProtocolEntity(meaning, to = Jid.normalize(phone))
+            self.toLower(messageEntity)
 
     @ProtocolEntityCallback("receipt")
     def onReceipt(self, entity):
