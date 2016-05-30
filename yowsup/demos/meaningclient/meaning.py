@@ -22,7 +22,7 @@ def formatresponse(jsonstr, word):
         for result in parsed_json['results']:
             formattedstr = formattedstr + str(i) + ". " + result['definition'] + "\n"
             try:
-                for synonym in result['synonyms']
+                for synonym in result['synonyms']:
                     synonyms = synonyms + synonym + ", "
             except:
                 print ("Error while trying to get synonym")
