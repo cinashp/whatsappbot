@@ -23,7 +23,7 @@ class MeaningLayer(YowInterfaceLayer):
         messageBody = messageProtocolEntity.getBody()
         messageToBeSent = ""
         if messageProtocolEntity.getType() == 'text':
-            if 'meaning' in messageBody:
+            if 'meaning?' in messageBody.lower():
                 messageToBeSent = getmeaningfromapi(messageBody)
                 messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                 self.toLower(messageEntity)
