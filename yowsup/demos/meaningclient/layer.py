@@ -9,37 +9,38 @@ class MeaningLayer(YowInterfaceLayer):
 
     @ProtocolEntityCallback("message")
     def onMessage(self, messageProtocolEntity):
-
-        if messageProtocolEntity.getType() == 'text':
-            self.onTextMessage(messageProtocolEntity)
-        elif messageProtocolEntity.getType() == 'media':
-            self.onMediaMessage(messageProtocolEntity)
-
-        #self.toLower(messageProtocolEntity.forward(messageProtocolEntity.getFrom()))
-        self.toLower(messageProtocolEntity.ack())
-        self.toLower(messageProtocolEntity.ack(True))
-
-        phone = messageProtocolEntity.getFrom()
-        messageBody = messageProtocolEntity.getBody()
-        messageToBeSent = ""
-        if messageProtocolEntity.getType() == 'text':
-            if 'meaning?' in messageBody.lower():
-                messageToBeSent = getmeaningfromapi(messageBody)
-                messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                self.toLower(messageEntity)
-
-            elif 'ipl' in messageBody.lower():
-                messageToBeSent = gettweetsfromapi(messageBody)
-                messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                self.toLower(messageEntity)
-
-            elif 'score' in messageBody.lower():
-                messageToBeSent = getscorefromapi(messageBody)
-                messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                self.toLower(messageEntity)
-
-            print (messageToBeSent)
-             
+        try:
+            if messageProtocolEntity.getType() == 'text':
+                self.onTextMessage(messageProtocolEntity)
+            elif messageProtocolEntity.getType() == 'media':
+                self.onMediaMessage(messageProtocolEntity)
+            
+            #self.toLower(messageProtocolEntity.forward(messageProtocolEntity.getFrom()))
+            self.toLower(messageProtocolEntity.ack())
+            self.toLower(messageProtocolEntity.ack(True))
+            
+            phone = messageProtocolEntity.getFrom()
+            messageBody = messageProtocolEntity.getBody()
+            messageToBeSent = ""
+            if messageProtocolEntity.getType() == 'text':
+                if 'meaning?' in messageBody.lower():
+                    messageToBeSent = getmeaningfromapi(messageBody)
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
+            
+                elif 'ipl' in messageBody.lower():
+                    messageToBeSent = gettweetsfromapi(messageBody)
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
+            
+                elif 'score' in messageBody.lower():
+                    messageToBeSent = getscorefromapi(messageBody)
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
+            
+                print (messageToBeSent)
+        except:
+            print ("Unknown error occured...")
 
     @ProtocolEntityCallback("receipt")
     def onReceipt(self, entity):
