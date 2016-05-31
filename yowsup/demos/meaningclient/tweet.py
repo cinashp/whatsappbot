@@ -1,5 +1,6 @@
 import requests
 import json
+import ConfigParser
 from application_only_auth import Client
 
 
@@ -56,12 +57,13 @@ def getscorefromapi( messageBody ):
     return "Unknown error occured..."
 
 def getconsumerkey():
-    with open('../consumerkey.txt', 'r') as f:
-        first_line = f.readline()
-    return first_line.strip()
+    configParser = ConfigParser.RawConfigParser()   
+    configFilePath = r'../apiconfigs.txt'
+    configParser.read(configFilePath)
+    return configParser.get('twitter', 'consumerkey')
 
 def getconsumersecret():
-    with open('../consumersecret.txt', 'r') as f:
-        first_line = f.readline()
-    return first_line.strip()
-    
+    configParser = ConfigParser.RawConfigParser()   
+    configFilePath = r'../apiconfigs.txt'
+    configParser.read(configFilePath)
+    return configParser.get('twitter', 'consumersecret')

@@ -39,8 +39,8 @@ class MeaningLayer(YowInterfaceLayer):
                     self.toLower(messageEntity)
             
                 print (messageToBeSent)
-        except:
-            print ("Unknown error occured...")
+        except Exception, e:
+            print (e)
 
     @ProtocolEntityCallback("receipt")
     def onReceipt(self, entity):

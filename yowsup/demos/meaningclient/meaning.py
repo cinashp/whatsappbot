@@ -1,10 +1,12 @@
 import requests
 import json
+import ConfigParser
 
 def getmeaningfromapi( messageBody ):
     word = messageBody.lower().replace("meaning?", "").strip()
     url = 'https://wordsapiv1.p.mashape.com/words/' + word
-    headers = {"X-Mashape-Key": "mUFkRnNzzkmshprtCzJabFXeypDgp1tI7vZjsnPFdzXVL7buZx",
+    apikey = getwordsapikeyfromconfig()
+    headers = {"X-Mashape-Key": apikey,
                "Accept": "application/json"}
     response = requests.get(url, headers=headers)
     return formatresponse(response.text, word)
@@ -30,3 +32,9 @@ def formatresponse(jsonstr, word):
         return formattedstr + "\n" + "*Synonyms:* " + synonyms[:-2]
     except:
         return "*" + word + "* not found in dictionary"
+
+def getwordsapikeyfromconfig():
+    configParser = ConfigParser.RawConfigParser()   
+    configFilePath = r'../apiconfigs.txt'
+    configParser.read(configFilePath)
+    return configParser.get('wordsapi', 'key')
