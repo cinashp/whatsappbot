@@ -3,6 +3,7 @@ from yowsup.layers.protocol_messages.protocolentities  import TextMessageProtoco
 from yowsup.common.tools import Jid
 from meaning import getmeaningfromapi
 from tweet import gettweetsfromapi
+from wishsender import sendwish
 
 class MeaningLayer(YowInterfaceLayer):
 
@@ -22,6 +23,9 @@ class MeaningLayer(YowInterfaceLayer):
             messageBody = messageProtocolEntity.getBody()
             messageToBeSent = ""
             if messageProtocolEntity.getType() == 'text':
+                if 'happy' in messageBody.lower() or 'congrats' in messageBody.lower():
+                    sendmessage = sendwish(messageBody)
+                        self.toLower(messageProtocolEntity.forward(messageProtocolEntity.getFrom()))
                 if 'meaning?' in messageBody.lower():
                     messageToBeSent = getmeaningfromapi(messageBody)
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
