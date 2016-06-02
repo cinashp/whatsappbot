@@ -25,6 +25,7 @@ class MeaningLayer(YowInterfaceLayer):
             if messageProtocolEntity.getType() == 'text':
                 if 'happy' in messageBody.lower() or 'congrats' in messageBody.lower():
                     sendmessage = sendwish(messageBody)
+                    if sendmessage == True:
                         self.toLower(messageProtocolEntity.forward(messageProtocolEntity.getFrom()))
                 if 'meaning?' in messageBody.lower():
                     messageToBeSent = getmeaningfromapi(messageBody)

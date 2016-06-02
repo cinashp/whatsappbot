@@ -16,7 +16,7 @@ def gettweetsfromapi( messageBody ):
     print status['resources']['search']
 
     return formattweet(tweet)
-    
+
 def formattweet(tweet):
     try:
         parsed_json = tweet
@@ -32,7 +32,7 @@ def formattweet(tweet):
     except Exception, e:
         print e
         return "Unknown error occured while fetching the tweet..."
-    
+
 
 def gethashtag( messageBody ):
     hashtags = set([word[1:] for word in messageBody.split(' ') if word.startswith("#")])
