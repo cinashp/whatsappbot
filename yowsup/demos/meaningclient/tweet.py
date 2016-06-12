@@ -10,7 +10,7 @@ def gettweetsfromapi( messageBody ):
     client = Client(CONSUMER_KEY, CONSUMER_SECRET)
 
     hashtag = gethashtag(messageBody);
-    tweet = client.request('https://api.twitter.com/1.1/search/tweets.json?q=' + hashtag + '-RT&count=5&lang=en')
+    tweet = client.request('https://api.twitter.com/1.1/search/tweets.json?q=' + hashtag + '&count=5&lang=en')
 
     status = client.rate_limit_status()
     print status['resources']['search']
