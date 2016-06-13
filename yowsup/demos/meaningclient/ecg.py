@@ -5,7 +5,7 @@ def queueThisPerson( phone ):
     return queueCount(phone)
 
 def queueCount( phone ):
-    ecgfile = 'ecgqueue.txt'
+    ecgfile = '../ecgqueue.txt'
     file = open(ecgfile, 'r')
     lines = file.read().splitlines()
     file.close()
@@ -20,7 +20,7 @@ def queueCount( phone ):
     return 'You are ' + len(lines) + ' in queue..'
 
 def dequeueEcg():
-    ecgfile = 'ecgqueue.txt'
+    ecgfile = '../ecgqueue.txt'
     file = open(ecgfile, 'r')
     lines = file.read().splitlines()
     file.close()
