@@ -20,7 +20,6 @@ from axolotl.groups.senderkeyname import SenderKeyName
 from axolotl.groups.groupsessionbuilder import GroupSessionBuilder
 from axolotl.protocol.senderkeydistributionmessage import SenderKeyDistributionMessage
 from yowsup.layers.protocol_messages.protocolentities  import TextMessageProtocolEntity
-from yowsup.common.tools import Jid
 
 import logging
 import copy
