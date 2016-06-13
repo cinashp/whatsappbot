@@ -17,7 +17,7 @@ def queueCount( phone ):
     file.write('\n')
     file.close()
 
-    return 'You are ' + str(len(lines)) + ' in queue..'
+    return 'You are ' + str(len(lines) + 1) + ' in queue..'
 
 def dequeueEcg():
     ecgfile = '../ecgqueue.txt'
