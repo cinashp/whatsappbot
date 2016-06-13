@@ -90,15 +90,9 @@ class AxolotlReceivelayer(AxolotlBaseLayer):
                 self.handleWhisperMessage(node)
             if encMessageProtocolEntity.getEnc(EncProtocolEntity.TYPE_SKMSG):
                 self.handleSenderKeyMessage(node)
-        except InvalidMessageException as e:
-            logger.warning("InvalidMessage  %s, going to send a retry", encMessageProtocolEntity.getAuthor(False))
+        except (InvalidMessageException, InvalidKeyIdException) as e:
+            logger.warning("InvalidMessage or KeyId for %s, going to send a retry", encMessageProtocolEntity.getAuthor(False))
             retry = RetryOutgoingReceiptProtocolEntity.fromMessageNode(node, self.store.getLocalRegistrationId())
-            self.toLower(retry.toProtocolTreeNode())
-        except InvalidKeyIdException as e:
-            logger.warning("Invalid KeyId for %s, going to send a retry", encMessageProtocolEntity.getAuthor(False))
-            messageToBeSent = 'hi'
-            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(encMessageProtocolEntity.getAuthor(False)))
-            self.toLower(messageEntity)
             self.toLower(retry.toProtocolTreeNode())
         except NoSessionException as e:
             logger.warning("No session for %s, getting their keys now", encMessageProtocolEntity.getAuthor(False))
