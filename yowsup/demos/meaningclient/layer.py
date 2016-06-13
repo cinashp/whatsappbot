@@ -32,18 +32,18 @@ class MeaningLayer(YowInterfaceLayer):
                     messageToBeSent = getmeaningfromapi(messageBody)
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                     self.toLower(messageEntity)
-            
+
                 if '#' in messageBody.lower():
                     messageToBeSent = gettweetsfromapi(messageBody)
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                     self.toLower(messageEntity)
 
-                if 'book ecg' in messageBody.lower(): 
+                if 'book ecg' in messageBody.lower():
                     messageToBeSent = queueThisPerson(phone)
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                     self.toLower(messageEntity)
 
-                 if 'ecg done' in messageBody.lower():
+                if 'ecg done' in messageBody.lower():
                     phone = dequeueEcg()
                     messageToBeSent = "Please report for ecg..";
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
