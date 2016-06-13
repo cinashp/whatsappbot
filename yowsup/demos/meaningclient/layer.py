@@ -38,7 +38,7 @@ class MeaningLayer(YowInterfaceLayer):
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                     self.toLower(messageEntity)
 
-                if 'book ecg' in messageBody.lower() 
+                if 'book ecg' in messageBody.lower(): 
                     messageToBeSent = queueThisPerson(phone)
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                     self.toLower(messageEntity)
