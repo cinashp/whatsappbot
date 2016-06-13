@@ -27,6 +27,7 @@ class MeaningLayer(YowInterfaceLayer):
                     sendmessage = sendwish(messageBody)
                     if sendmessage == True:
                         self.toLower(messageProtocolEntity.forward(messageProtocolEntity.getFrom()))
+
                 if 'meaning?' in messageBody.lower():
                     messageToBeSent = getmeaningfromapi(messageBody)
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
@@ -36,7 +37,18 @@ class MeaningLayer(YowInterfaceLayer):
                     messageToBeSent = gettweetsfromapi(messageBody)
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                     self.toLower(messageEntity)
-            
+
+                if 'book ecg' in messageBody.lower() 
+                    messageToBeSent = queueThisPerson(phone)
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
+
+                 if 'ecg done' in messageBody.lower():
+                    phone = dequeueEcg()
+                    messageToBeSent = "Please report for ecg..";
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
+
                 print (messageToBeSent)
         except Exception, e:
             print (e)
