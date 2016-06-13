@@ -89,6 +89,7 @@ class AxolotlReceivelayer(AxolotlBaseLayer):
             if encMessageProtocolEntity.getEnc(EncProtocolEntity.TYPE_SKMSG):
                 self.handleSenderKeyMessage(node)
         except (InvalidMessageException, InvalidKeyIdException) as e:
+            contacts_sync(self, encMessageProtocolEntity.getAuthor(False))
             logger.warning("InvalidMessage or KeyId for %s, going to send a retry", encMessageProtocolEntity.getAuthor(False))
             retry = RetryOutgoingReceiptProtocolEntity.fromMessageNode(node, self.store.getLocalRegistrationId())
             self.toLower(retry.toProtocolTreeNode())
