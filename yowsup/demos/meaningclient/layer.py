@@ -11,7 +11,6 @@ class MeaningLayer(YowInterfaceLayer):
     @ProtocolEntityCallback("message")
     def onMessage(self, messageProtocolEntity):
         try:
-            print ('I am here..')
             if messageProtocolEntity.getType() == 'text':
                 self.onTextMessage(messageProtocolEntity)
             elif messageProtocolEntity.getType() == 'media':
