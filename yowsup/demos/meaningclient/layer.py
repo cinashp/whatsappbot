@@ -4,6 +4,7 @@ from yowsup.common.tools import Jid
 from meaning import getmeaningfromapi
 from tweet import gettweetsfromapi
 from wishsender import sendwish
+from ecg import queueThisPerson, dequeueEcg
 
 class MeaningLayer(YowInterfaceLayer):
 
