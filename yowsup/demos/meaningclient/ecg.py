@@ -9,7 +9,7 @@ def queueCount( phone ):
     file = open(ecgfile, 'r')
     lines = file.read().splitlines()
     file.close()
-    if phone in lines
+    if phone in lines:
        return 'You are already in queue..'
 
     file = open(ecgfile, 'a')
