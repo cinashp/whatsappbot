@@ -2,9 +2,6 @@ import requests
 import json
 import ConfigParser
 
-def isQuizActive():
-    return False;
-
 def getQuestion():
     #Create a math question, like randomNumber() + randomNumber() + randomNumber()
     question = "100 + 10"
