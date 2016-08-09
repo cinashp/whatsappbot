@@ -58,10 +58,6 @@ class MeaningLayer(YowInterfaceLayer):
                 print (messageToBeSent)
         except Exception, e:
             print (e)
-    
-    def sendMessage(message, phone):
-        messageEntity = TextMessageProtocolEntity(message, to = Jid.normalize(phone))
-        self.toLower(messageEntity)
 
     @ProtocolEntityCallback("receipt")
     def onReceipt(self, entity):
@@ -81,3 +77,7 @@ class MeaningLayer(YowInterfaceLayer):
 
         elif messageProtocolEntity.getMediaType() == "vcard":
             print("Echoing vcard (%s, %s) to %s" % (messageProtocolEntity.getName(), messageProtocolEntity.getCardData(), messageProtocolEntity.getFrom(False)))
+
+def sendMessage(message, phone):
+    messageEntity = TextMessageProtocolEntity(message, to = Jid.normalize(phone))
+    self.toLower(messageEntity)
