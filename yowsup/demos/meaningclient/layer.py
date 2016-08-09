@@ -4,7 +4,6 @@ from yowsup.common.tools import Jid
 from meaning import getmeaningfromapi
 from tweet import gettweetsfromapi
 from wishsender import sendwish
-from ecg import queueThisPerson, dequeueEcg
 
 class MeaningLayer(YowInterfaceLayer):
 
@@ -36,17 +35,6 @@ class MeaningLayer(YowInterfaceLayer):
 
                 if '#' in messageBody.lower():
                     messageToBeSent = gettweetsfromapi(messageBody)
-                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                    self.toLower(messageEntity)
-
-                if 'book ecg' in messageBody.lower():
-                    messageToBeSent = queueThisPerson(phone)
-                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                    self.toLower(messageEntity)
-
-                if 'ecg done' in messageBody.lower():
-                    phone = dequeueEcg()
-                    messageToBeSent = "Please report for ecg..";
                     messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
                     self.toLower(messageEntity)
 
