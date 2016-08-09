@@ -15,11 +15,11 @@ def getCurrentAnswer(groupId):
     #check the db for the current answer against the db and return
     return 1;
 
-def updateScore(groupId, sender)
+def updateScore(groupId, sender):
     #update score in the db
     return False;
 
-def getScore(groupId)
+def getScore(groupId):
     #get the score from db
     return "hi"
 
