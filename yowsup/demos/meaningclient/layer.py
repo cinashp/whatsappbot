@@ -26,16 +26,16 @@ class MeaningLayer(YowInterfaceLayer):
             
             print phone
             print "**************";
-            print messageProtocolEntity.getNotify()
+            print 
             
             if messageProtocolEntity.getType() == 'text':
                 if isQuizActive(Jid.normalize(phone)):
                     currentAnswer = getCurrentAnswer(Jid.normalize(phone));
                     if currentAnswer == messageBody.lower():
-                        #get sender name / phone number
-                        #updateScore(Jid.normalize(phone), sender)
-                        #messageToBeSent = getScore()
-                        #sendMessage(messageToBeSent, phone)
+                        sender = messageProtocolEntity.getNotify();
+                        updateScore(Jid.normalize(phone), sender)
+                        messageToBeSent = getScore()
+                        sendMessage(messageToBeSent, phone)
                         messageToBeSent = getQuestion();
                 if 'start quiz' in messageBody.lower():
                     #start quiz
