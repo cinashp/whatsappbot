@@ -4,6 +4,7 @@ from yowsup.common.tools import Jid
 from meaning import getmeaningfromapi
 from tweet import gettweetsfromapi
 from wishsender import sendwish
+from quizzer import getQuestion
 
 class MeaningLayer(YowInterfaceLayer):
 
@@ -22,7 +23,25 @@ class MeaningLayer(YowInterfaceLayer):
             phone = messageProtocolEntity.getFrom()
             messageBody = messageProtocolEntity.getBody()
             messageToBeSent = ""
+			
+			print phone
+			print "**************";
+			print messageProtocolEntity.getNotify()
+			
             if messageProtocolEntity.getType() == 'text':
+			    if isQuizActive(Jid.normalize(phone)):
+					currentAnswer = getCurrentAnswer(Jid.normalize(phone));
+					if currentAnswer == messageBody.lower():
+					    #get sender name / phone number
+						#updateScore(Jid.normalize(phone), sender)
+						#messageToBeSent = getScore()
+						#sendMessage(messageToBeSent, phone)
+						messageToBeSent = getQuestion();
+			    if 'start quiz' in messageBody.lower():
+				    #start quiz
+					messageToBeSent = getQuestion();
+					sendMessage(messageToBeSent, phone)
+					
                 if 'happy' in messageBody.lower() or 'congrats' in messageBody.lower():
                     sendmessage = sendwish(messageBody)
                     if sendmessage == True:
@@ -30,17 +49,19 @@ class MeaningLayer(YowInterfaceLayer):
 
                 if 'meaning?' in messageBody.lower():
                     messageToBeSent = getmeaningfromapi(messageBody)
-                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                    self.toLower(messageEntity)
+                    sendMessage(messageToBeSent, phone)
 
                 if '#' in messageBody.lower():
                     messageToBeSent = gettweetsfromapi(messageBody)
-                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                    self.toLower(messageEntity)
+                    sendMessage(messageToBeSent, phone)
 
                 print (messageToBeSent)
         except Exception, e:
             print (e)
+	
+	def sendMessage(message, phone)
+		messageEntity = TextMessageProtocolEntity(message, to = Jid.normalize(phone))
+        self.toLower(messageEntity)
 
     @ProtocolEntityCallback("receipt")
     def onReceipt(self, entity):
