@@ -26,7 +26,7 @@ class MeaningLayer(YowInterfaceLayer):
             
             print phone
             print "**************";
-            print 
+            print messageProtocolEntity.getNotify()
             
             if messageProtocolEntity.getType() == 'text':
                 if isQuizActive(Jid.normalize(phone)):
