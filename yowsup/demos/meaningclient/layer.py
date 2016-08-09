@@ -59,7 +59,7 @@ class MeaningLayer(YowInterfaceLayer):
         except Exception, e:
             print (e)
     
-    def sendMessage(message, phone)
+    def sendMessage(message, phone):
         messageEntity = TextMessageProtocolEntity(message, to = Jid.normalize(phone))
         self.toLower(messageEntity)
 
