@@ -35,12 +35,14 @@ class MeaningLayer(YowInterfaceLayer):
                         sender = messageProtocolEntity.getNotify();
                         updateScore(Jid.normalize(phone), sender)
                         messageToBeSent = getScore()
-                        sendMessage(messageToBeSent, phone)
+                        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                        self.toLower(messageEntity)
                         messageToBeSent = getQuestion();
                 if 'start quiz' in messageBody.lower():
                     #start quiz
                     messageToBeSent = getQuestion();
-                    sendMessage(messageToBeSent, phone)
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
                     
                 if 'happy' in messageBody.lower() or 'congrats' in messageBody.lower():
                     sendmessage = sendwish(messageBody)
@@ -49,11 +51,13 @@ class MeaningLayer(YowInterfaceLayer):
 
                 if 'meaning?' in messageBody.lower():
                     messageToBeSent = getmeaningfromapi(messageBody)
-                    sendMessage(messageToBeSent, phone)
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
 
                 if '#' in messageBody.lower():
                     messageToBeSent = gettweetsfromapi(messageBody)
-                    sendMessage(messageToBeSent, phone)
+                    messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                    self.toLower(messageEntity)
 
                 print (messageToBeSent)
         except Exception, e:
@@ -77,7 +81,3 @@ class MeaningLayer(YowInterfaceLayer):
 
         elif messageProtocolEntity.getMediaType() == "vcard":
             print("Echoing vcard (%s, %s) to %s" % (messageProtocolEntity.getName(), messageProtocolEntity.getCardData(), messageProtocolEntity.getFrom(False)))
-
-def sendMessage(message, phone):
-    messageEntity = TextMessageProtocolEntity(message, to = Jid.normalize(phone))
-    self.toLower(messageEntity)
