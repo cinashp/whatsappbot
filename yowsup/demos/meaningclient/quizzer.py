@@ -39,6 +39,7 @@ def getIntroMessage():
 
 def updateQuestionCount(groupId):
     #update the question count
+    return True;
 
 def getFinalMessage(groupId):
     #close the quiz
