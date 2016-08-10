@@ -1,6 +1,7 @@
 import requests
 import json
 import ConfigParser
+from random import randint
 
 def startQuiz(groupId):
     if(isQuizActive):
@@ -10,8 +11,11 @@ def startQuiz(groupId):
         return True;
 
 def getQuestion():
-    #Create a math question, like randomNumber() + randomNumber() + randomNumber()
-    question = "100 + 10"
+    num1 = randint(9,99)
+    num2 = randint(9,99)
+    ans = num1 + num2
+    question = num1 + "+" + num2
+    #update current answer in db
     return question;
 
 def isQuizActive(groupId):
