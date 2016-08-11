@@ -4,7 +4,7 @@ import ConfigParser
 from random import randint
 
 def startQuiz(groupId):
-    if(isQuizActive(groupId)):
+    if(isQuizActive(groupId) == True):
         return False;
     else:
         #create a quiz

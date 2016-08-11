@@ -4,7 +4,7 @@ from yowsup.common.tools import Jid
 from meaning import getmeaningfromapi
 from tweet import gettweetsfromapi
 from wishsender import sendwish
-from quizzer import startQuiz,getQuestion, isQuizActive, getCurrentAnswer, updateScore, getScore
+from quizzer import startQuiz,getQuestion, isQuizActive, getCurrentAnswer, updateScore, getScore, getIntroMessage, getFinalMessage
 
 class MeaningLayer(YowInterfaceLayer):
 
@@ -48,7 +48,7 @@ class MeaningLayer(YowInterfaceLayer):
                             self.toLower(messageEntity);
 
                 if 'start quiz' in messageBody.lower():
-                    if(startQuiz(Jid.normalize(phone))):
+                    if(startQuiz(Jid.normalize(phone)) == True):
                         messageToBeSent = getIntroMessage();
                         messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
                         self.toLower(messageEntity)
