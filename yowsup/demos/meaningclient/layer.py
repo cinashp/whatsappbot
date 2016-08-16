@@ -17,8 +17,8 @@ class MeaningLayer(YowInterfaceLayer):
                 self.onMediaMessage(messageProtocolEntity)
             
             #self.toLower(messageProtocolEntity.forward(messageProtocolEntity.getFrom()))
-            self.toLower(messageProtocolEntity.ack())
-            self.toLower(messageProtocolEntity.ack(True))
+            #self.toLower(messageProtocolEntity.ack())
+            #self.toLower(messageProtocolEntity.ack(True))
             
             phone = messageProtocolEntity.getFrom()
             messageBody = messageProtocolEntity.getBody()
