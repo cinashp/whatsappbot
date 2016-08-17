@@ -43,7 +43,7 @@ class MeaningLayer(YowInterfaceLayer):
                             messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
                             self.toLower(messageEntity);
                         else:
-                            messageToBeSent = getQuestion();
+                            messageToBeSent = getQuestion(Jid.normalize(phone));
                             messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
                             self.toLower(messageEntity);
 
