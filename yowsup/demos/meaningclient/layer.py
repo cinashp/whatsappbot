@@ -29,37 +29,37 @@ class MeaningLayer(YowInterfaceLayer):
             print messageProtocolEntity.getNotify()
             
             if messageProtocolEntity.getType() == 'text':
-                if isQuizActive(Jid.normalize(phone)):
-                    currentAnswer = getCurrentAnswer(Jid.normalize(phone));
-                    if currentAnswer == messageBody.lower():
-                        sender = messageProtocolEntity.getNotify();
-                        updateScore(Jid.normalize(phone), sender);
-                        messageToBeSent = getScore();
-                        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
-                        self.toLower(messageEntity);
-                        updateQuestionCount(Jid.normalize(phone));
-                        if(wasLastQuestion):
-                            messageToBeSent = getFinalMessage(Jid.normalize(phone));
-                            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
-                            self.toLower(messageEntity);
-                        else:
-                            messageToBeSent = getQuestion(Jid.normalize(phone));
-                            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
-                            self.toLower(messageEntity);
+                #if isQuizActive(Jid.normalize(phone)):
+                #    currentAnswer = getCurrentAnswer(Jid.normalize(phone));
+                #    if currentAnswer == messageBody.lower():
+                #        sender = messageProtocolEntity.getNotify();
+                #        updateScore(Jid.normalize(phone), sender);
+                #        messageToBeSent = getScore();
+                #        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
+                #        self.toLower(messageEntity);
+                #        updateQuestionCount(Jid.normalize(phone));
+                #        if(wasLastQuestion):
+                #            messageToBeSent = getFinalMessage(Jid.normalize(phone));
+                #            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
+                #            self.toLower(messageEntity);
+                #        else:
+                #            messageToBeSent = getQuestion(Jid.normalize(phone));
+                #            messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
+                #            self.toLower(messageEntity);
 
-                if 'start quiz' in messageBody.lower():
-                    if(startQuiz(Jid.normalize(phone)) == True):
-                        messageToBeSent = getIntroMessage();
-                        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
-                        self.toLower(messageEntity)
-                        #wait 30 seconds
-                        messageToBeSent = getQuestion();
-                        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
-                        self.toLower(messageEntity);
-                    else:
-                        messageToBeSent = "Quiz already in progress...";
-                        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
-                        self.toLower(messageEntity)
+                #if 'start quiz' in messageBody.lower():
+                #    if(startQuiz(Jid.normalize(phone)) == True):
+                #        messageToBeSent = getIntroMessage();
+                #        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
+                #        self.toLower(messageEntity)
+                #        #wait 30 seconds
+                #        messageToBeSent = getQuestion();
+                #        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone));
+                #        self.toLower(messageEntity);
+                #    else:
+                #        messageToBeSent = "Quiz already in progress...";
+                #        messageEntity = TextMessageProtocolEntity(messageToBeSent, to = Jid.normalize(phone))
+                #        self.toLower(messageEntity)
 
                 if 'happy' in messageBody.lower() or 'congrats' in messageBody.lower():
                     sendmessage = sendwish(messageBody)
