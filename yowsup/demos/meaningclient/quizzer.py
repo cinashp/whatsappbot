@@ -2,7 +2,7 @@ import requests
 import json
 import ConfigParser
 from random import randint
-import pyodbc
+#import pyodbc
 
 def startQuiz(groupId):
     if(isQuizActive(groupId) == True):
